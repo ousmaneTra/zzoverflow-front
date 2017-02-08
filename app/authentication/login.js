@@ -1,7 +1,7 @@
 'use strict';
 var apiUrl = 'http://localhost:8080' ;
 
-angular.module('myApp.authentication', ['ngRoute'])
+angular.module('myApp.authentication', ['ngRoute','ngCookies'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/login', {
@@ -10,7 +10,7 @@ angular.module('myApp.authentication', ['ngRoute'])
   });
 }])
 
-.controller('authenticationCtrl', ['$scope','$http','authenticationService','$routeParams','$location',function($scope,$http,authenticationService,$routeParams,$location) {
+.controller('authenticationCtrl', ['$scope','$http','authenticationService','$routeParams','$location','$cookies',function($scope,$http,authenticationService,$routeParams,$location,$cookies) {
   $scope.user = {} ;
   $scope.message = '' ;
   console.log('authenticationCtrl');
@@ -18,8 +18,9 @@ angular.module('myApp.authentication', ['ngRoute'])
     $http({method: 'POST', url: apiUrl+'/api/login',data: $scope.user}).then(function successCallback(response) {
       var data = response.data ;
       var redirect_url = $routeParams.redirect_url ;
-      authenticationService.isAuthenticated = true ;
-      $http.defaults.headers.common.Authorization = data.token_type+' '+data.access_token;
+      var auth = data.token_type+' '+data.access_token ;
+      authenticationService.setAuthorizationHeader(auth) ;
+      $cookies.put('auth',auth) ;
       
       $location.search({}) ; // remove path params
       if(redirect_url){
@@ -35,9 +36,13 @@ angular.module('myApp.authentication', ['ngRoute'])
   }
 }])
 
-.factory('authenticationService', function($location) {
+.factory('authenticationService', function($location,$http) {
   return {
         isAuthenticated : false,
+        setAuthorizationHeader: function(value){
+            this.isAuthenticated = true ;
+            $http.defaults.headers.common.Authorization = value ;
+        },
         authenticate: function(redirectUrl) {
             if(!this.isAuthenticated) {
               $location.path('/login').search({redirect_url:redirectUrl}) ;

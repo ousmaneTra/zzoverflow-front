@@ -9,7 +9,21 @@ angular.module('myApp.profile', ['ngRoute'])
   });
 }])
 
-.controller('ProfileCtrl', ['authenticationService','$location',function(authenticationService,$location) {
+.controller('ProfileCtrl', ['apiUrl','authenticationService','$http','$location','$scope',function(apiUrl,authenticationService,$http,$location,$scope) {
  console.log('ProfileCtrl') ;
- authenticationService.authenticate('/profile') ;
+ $scope.user = {} ;
+ if(!authenticationService.isAuthenticated){
+   authenticationService.authenticate('/profile') ;
+   return ;
+ }
+  //From here, a user is authenticated (or token invalid)
+  $http({method: 'GET', url: apiUrl+'/user'}).then(function successCallback(response) {
+      $scope.user = response.data ;
+  }, function errorCallback(response) {
+    console.log('Error GET /api/user') ;
+      if(response.status == 401){
+        //token invalid
+        authenticationService.authenticate('/profile') ;
+      }
+  });
 }]);
