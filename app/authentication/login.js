@@ -1,7 +1,7 @@
 'use strict';
 var apiUrl = 'http://localhost:8080' ;
 
-angular.module('myApp.authentication', ['ngRoute','ngCookies'])
+angular.module('myApp.authentication', ['ngRoute','ngCookies','myApp.services'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/login', {
@@ -15,7 +15,8 @@ angular.module('myApp.authentication', ['ngRoute','ngCookies'])
   $scope.message = '' ;
   console.log('authenticationCtrl');
   $scope.loginButtonClick = function(){
-    $http({method: 'POST', url: apiUrl+'/api/login',data: $scope.user}).then(function successCallback(response) {
+    $http({method: 'POST', url: apiUrl+'/api/login',data: $scope.user})
+    .then(function successCallback(response) {
       var data = response.data ;
       var redirect_url = $routeParams.redirect_url ;
       var auth = data.token_type+' '+data.access_token ;
@@ -34,19 +35,4 @@ angular.module('myApp.authentication', ['ngRoute','ngCookies'])
       console.log('Error') ;
   });
   }
-}])
-
-.factory('authenticationService', function($location,$http) {
-  return {
-        isAuthenticated : false,
-        setAuthorizationHeader: function(value){
-            this.isAuthenticated = true ;
-            $http.defaults.headers.common.Authorization = value ;
-        },
-        authenticate: function(redirectUrl) {
-            if(!this.isAuthenticated) {
-              $location.path('/login').search({redirect_url:redirectUrl}) ;
-            }
-        }
-    };
-}) ;
+}]) ;

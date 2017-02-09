@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.questions', ['ngRoute'])
+angular.module('myApp.questions', ['ngRoute','myApp.services'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/', {
@@ -9,12 +9,14 @@ angular.module('myApp.questions', ['ngRoute'])
   });
 }])
 
-.controller('questionsCtrl', ['apiUrl','$scope','$http',function(apiUrl,$scope,$http) {
+.controller('questionsCtrl', ['questionService','handleStatusService','$scope','$http',function(questionService,handleStatusService,$scope,$http) {
   $scope.questions = [] ;
   console.log('questionsCtrl') ;
-  $http({method: 'GET', url: apiUrl+'/questions'}).then(function successCallback(response) {
-      $scope.questions = response.data ;
-  }, function errorCallback(response) {
-      console.log('Error GET /api/questions') ;
-  });
+
+  questionService.getAll(10).then(function successCallback(response) {
+        $scope.questions = response.data ;
+    }, function errorCallback(response) {
+        handleStatusService.handle(response.status,'/') ;
+    }) ;
+
 }]);
