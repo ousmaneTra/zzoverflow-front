@@ -3,12 +3,14 @@ var apiUrl = 'http://localhost:8080' ;
 
 angular.module('myApp.authentication', ['ngRoute','ngCookies','myApp.services'])
 
+/*
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/login', {
     templateUrl: 'authentication/login.html',
     controller: 'authenticationCtrl'
   });
 }])
+*/
 
 .controller('authenticationCtrl', ['$scope','$http','authenticationService','$routeParams','$location','$cookies',function($scope,$http,authenticationService,$routeParams,$location,$cookies) {
   $scope.user = {} ;

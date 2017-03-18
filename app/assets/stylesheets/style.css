@@ -1,0 +1,143 @@
+/*-----------------------------------------------------------------------------
+
+KENBURNER RESPONSIVE BASIC STYLES OF HTML DOCUMENT
+
+Screen Stylesheet
+
+version:   	1.0
+date:      	07/27/11
+author:		themepunch
+email:     	support@themepunch.com
+website:   	http://www.themepunch.com
+-----------------------------------------------------------------------------*/
+
+
+
+.boxedcontainer		{	max-width: 1170px; margin:auto; padding:0px 30px;}
+
+/*********************************************
+	-	SETTINGS FOR BANNER CONTAINERS	-
+**********************************************/
+
+.tp-banner-container{
+	width:100%;
+	position:relative;
+	padding:0;
+
+}
+
+.tp-banner{
+	width:100%;
+	position:relative;
+}
+
+.tp-banner-fullscreen-container {
+		width:100%;
+		position:relative;
+		padding:0;
+}
+
+.post-content {
+	margin: 15px auto;
+}
+
+.logo-size {
+	width: 70px;
+}
+
+.logo-text {
+	color: #8B8E90;
+}
+
+.tag {
+	margin-right: 5px;
+	font-weight: 200;
+}
+
+.tag-container {
+	margin: 10px 0px 10px 0px;
+
+}
+
+.post-body {
+	min-height: 50px;
+}
+
+.avatar-image {
+	height: 47px;
+}
+
+.avatar-cursor {
+	cursor: pointer;
+}
+
+.reply-padding {
+	padding-top: 10;
+}
+
+.avatar-username {
+	font-size: 10px;
+	width: 47px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	text-align: center;
+}
+
+.pull-center{
+	margin-left: 37%;
+}
+
+.login_message {
+	padding: 6px 25px 20px 25px;
+	color: #c33;
+}
+
+.date-feed {
+	text-align: right;
+	font-size: 12px;
+	color: #999;
+}
+
+.pourcent-tag {
+	font-size: 13px;
+	padding: 4px;
+	text-align: right;
+}
+
+.important-qst {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: inline-block;
+	width: 90%;
+}
+
+.login-link {
+	padding: 6px;
+}
+
+.solved-icon {
+	cursor: pointer;
+	padding: 0px 6px 0px 8px;
+}
+
+.nok {
+	color: #ecf0f1;
+}
+
+.ok {
+	color: #1abc9c;
+}
+
+.edit-button {
+	width: 20%;
+	margin-left: 80%;
+}
+
+.align-table{
+	padding: 20px 50px;
+}
+
+.online {
+	color: #69aa46;
+}

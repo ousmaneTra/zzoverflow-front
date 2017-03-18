@@ -11,11 +11,24 @@ angular.module('myApp', [
   'myApp.questions'
 ]).
 config(['$locationProvider', '$routeProvider','$httpProvider', function($locationProvider, $routeProvider,$httpProvider) {
-  $locationProvider.hashPrefix('!');
+  
+  //$locationProvider.hashPrefix('!');
 
-  $routeProvider.otherwise({redirectTo: '/'});
+  // Routing 
+  $routeProvider.when('/', {
+    templateUrl: 'questions/questions.html',
+    controller: 'questionsCtrl'
+  });
+
+  $routeProvider.when('/login', {
+    templateUrl: 'authentication/login.html',
+    controller: 'authenticationCtrl'
+  });
+
+  
 
   $httpProvider.defaults.headers.common['Accept'] = 'application/json, text/javascript;charset=UTF-8';
+
 }])
 .constant('apiUrl','http://localhost:8080/api')
 .run(function(authenticationService,$cookies){
