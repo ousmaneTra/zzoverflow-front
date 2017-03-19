@@ -41,6 +41,7 @@ config(['$locationProvider', '$routeProvider','$httpProvider', function($locatio
 
 }])
 .constant('apiUrl','http://localhost:8080/api')
+.value('currentUser', {})
 .run(function(authenticationService,$cookies){
   var auth = $cookies.get("auth") ;
   if(auth){
@@ -51,8 +52,6 @@ config(['$locationProvider', '$routeProvider','$httpProvider', function($locatio
     //Do nothing !!!
   }
 }) ;
-
-myApp.value('currentUser', {});
 
 myApp.controller('sideBarController', ['$scope','metaQuestionService', function($scope, metaQuestionService) {
 

@@ -2,7 +2,7 @@
 
 angular.module('myApp.show', ['ngRoute','myApp.services'])
 
-.controller('showCtrl', ['apiUrl', 'questionService', 'authenticationService', 'handleStatusService', '$routeParams','$http','$location','$scope',function(apiUrl, questionService, authenticationService, handleStatusService, $routeParams, $http,$location,$scope) {
+.controller('showCtrl', ['$rootScope','apiUrl', 'questionService', 'authenticationService', 'handleStatusService', '$routeParams','$http','$location','$scope',function($rootScope, apiUrl, questionService, authenticationService, handleStatusService, $routeParams, $http,$location,$scope) {
     
     console.log('showCtrl') ;
     $scope.question = {};
@@ -18,8 +18,59 @@ angular.module('myApp.show', ['ngRoute','myApp.services'])
         handleStatusService.handle(response.status,'/') ;
     }) ;
 
+
+    $scope.upVote = function(state, type, id){
+
+        if(!authenticationService.isAuthenticated){
+            authenticationService.authenticate('/question/'+$scope.question.id) ;
+            return ;
+        }
+        //From here, a user is authenticated (or token invalid)
+        $http({method: 'GET', url: apiUrl+'/user'}).then(function successCallback(response) {
+            $rootScope.currentUser = response.data ;
+            console.log(response.data)
+            func()
+        }, function errorCallback(response) {
+            console.log('Error GET /api/user') ;
+            if(response.status == 401){
+                //token invalid
+                authenticationService.authenticate('/question/'+$scope.question.id) ;
+            }
+        });
+
+        var func = function(){
+            $http({ 
+                method: 'POST', 
+                url: apiUrl+'/vote/save',
+                data: {
+                    'post' : id,
+                    'user' : $rootScope.currentUser.id,
+                    'vote'    : state == 'up' ? '1' : '-1'
+                }
+            })
+            .then(function successCallback(response) {
+                if(type == 'qst')
+                    if(state == 'up')
+                        $scope.question.upvote = response.data
+                    else
+                        $scope.question.downvote = response.data
+                else if(type == 'ans')
+                    if(state == 'up')
+                        $scope.question.answers[id]
+                    else
+                        $scope.question.downvote = response.data
+            }, function errorCallback(response) {
+                console.log('Error') ;
+        })};
+        
+    }
+
+    $scope.downVote = function(){
+        
+    }
+
 }])
-.controller('replyCtrl', ['currentUser','apiUrl', 'questionService', 'authenticationService', 'handleStatusService', '$routeParams','$http','$location','$route','$scope',function(currentUser, apiUrl, questionService, authenticationService, handleStatusService, $routeParams, $http,$location,$route,$scope) {
+.controller('replyCtrl', ['$rootScope','apiUrl', 'questionService', 'authenticationService', 'handleStatusService', '$routeParams','$http','$location','$route','$scope',function($rootScope, apiUrl, questionService, authenticationService, handleStatusService, $routeParams, $http,$location,$route,$scope) {
 
     $scope.reply = {} ;
 
@@ -34,8 +85,8 @@ angular.module('myApp.show', ['ngRoute','myApp.services'])
             }
             //From here, a user is authenticated (or token invalid)
             $http({method: 'GET', url: apiUrl+'/user'}).then(function successCallback(response) {
-                currentUser = response.data ;
-                $scope.reply.user     = currentUser.id
+                $rootScope.currentUser = response.data ;
+                $scope.reply.user     = $rootScope.currentUser.id
                 $scope.reply.question = $scope.question.id;
                 createAnswer()
             }, function errorCallback(response) {

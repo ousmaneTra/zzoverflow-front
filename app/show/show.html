@@ -3,18 +3,13 @@
         <div class="topwrap">
             <div class="userinfo pull-left">
                 <div class="avatar">
-                    <g:if test="${question.user.avatar}">
-                            <img class="avatar avatar-image" src="" />
-                    </g:if>
-                    <g:else>
-                        <asset:image class="avatar-image" src="user/1.jpg" alt="" />
-                    </g:else>
+                    <img class="avatar avatar-image" src="../assets/images/user/1.jpg" />
                     <div class="status green">&nbsp;</div>
                     <div class="avatar-username">{{question.user.username}}</div>
                 </div>
 
                 <div class="icons">
-                    <img src="images/icon1.jpg" alt="">
+                    <img src="" alt="">
                 </div>
             </div>
             <div class="posttext pull-left">
@@ -26,15 +21,15 @@
         <div class="postinfobot">
 
             <div class="likeblock pull-left">
-                <div class="upvote up" data-id="${question.id}">
+                <div class="upvote up" ng-click="upVote('up', 'qst, 'question.id)">
                     <i class="fa fa-thumbs-o-up clickable"></i>
-                    <span id="upvalue${question.id}">
+                    <span >
                         {{question.upvote}}
                     </span>
                 </div>
-                <div class="downvote down" data-id="${question.id}">
+                <div class="downvote down" ng-click="upVote('down', 'qst', question.id)">
                     <i class="fa fa-thumbs-o-down clickable"></i>
-                    <span id="downvalue${question.id}">
+                    <span >
                         {{question.downvote}}
                     </span>
                 </div>
@@ -70,25 +65,17 @@
             <div class="topwrap">
                 <div class="userinfo pull-left">
                     <div class="avatar">
-                        <g:if test="${answer.user.avatar}">
-                            <img class="avatar avatar-image" src="${createLink(controller:'user', action:'avatar_image', id:answer.user.id)}" />
-                        </g:if>
-                        <g:else>
-                            <asset:image class="avatar-image" src="user/1.jpg" alt="" />
-                        </g:else>
+                            <img class="avatar avatar-image" src="../assets/images/user/1.jpg" />
                         <div class="status red">&nbsp;</div>
                         <div class="avatar-username">{{answer.user.username}}</div>
                     </div>
 
-                    <div class="icons">
-                        <!-- Solved question -->
-                        <g:if test="${question.correct}">
-                            <!-- Answer is correct -->
+                    <div class="icons" >
+                        <!--g:if test="${question.correct}">
                             <g:if test="${question.correct.id == answer.id}">
                                 <i class="fa fa-3x fa-check-circle solved-icon marksolved ok" data-id="${answer.id}" aria-hidden="true"></i>
                             </g:if>                                      
                             <g:else>
-                                <!-- Current user is question owner -->
                                 <g:if test="${currentUser?.id == question.user.id}">
                                     <i class="fa fa-3x fa-check-circle solved-icon marksolved nok" data-id="${answer.id}" aria-hidden="true"></i>                                           
                                 </g:if>
@@ -98,7 +85,8 @@
                             <g:if test="${question.user.id == currentUser?.id}">
                                 <i class="fa fa-3x fa-check-circle solved-icon marksolved nok" data-id="${answer.id}" aria-hidden="true"></i>                                           
                             </g:if>
-                        </g:else>
+                        </g:else-->
+                        <i class="fa fa-3x fa-check-circle solved-icon marksolved nok"  aria-hidden="true"></i> 
                     </div>
                 </div>
                 <div class="posttext pull-left">
@@ -109,15 +97,15 @@
             <div class="postinfobot">
 
                 <div class="likeblock pull-left">
-                    <div class="upvote up" data-id="${answer.id}">
+                    <div class="upvote up"  ng-click="upVote('up', 'ans', answer.id)">
                         <i class="fa fa-thumbs-o-up clickable"></i>
-                        <span id="upvalue${answer.id}">
+                        <span >
                             {{answer.upvote}}
                         </span>
                     </div>
-                    <div  class="downvote down" data-id="${answer.id}">
+                    <div  class="downvote down"  ng-click="upVote('down', 'ans', answer.id)">
                         <i class="fa fa-thumbs-o-down clickable"></i>
-                        <span id="downvalue${answer.id}">
+                        <span >
                             {{answer.downvote}}
                         </span>
                     </div>
@@ -131,9 +119,9 @@
 
                 <div class="posted pull-left">
                     <i class="fa fa-clock-o"></i> 
-                        Posted on : {{question.dateCreated | date : "dd-MM-yyyy" }}
+                        Posted on : {{answer.dateCreated | date : "dd-MM-yyyy" }}
                         @        
-                        {{question.dateCreated | date : "HH:mm" }}   
+                        {{answer.dateCreated | date : "HH:mm" }}   
                     </div>
 
                 <div class="next pull-right">                                        
@@ -154,26 +142,14 @@
             <div class="topwrap">
                 <div class="userinfo pull-left">
                     <div class="avatar">
-                        <sec:ifLoggedIn>
-                            <g:if test="${currentUser.avatar}">
-                                <img class="avatar avatar-image" src="${createLink(controller:'user', action:'avatar_image', id:currentUser.id)}" />
-                            </g:if>
-                            <g:else>
-                                <asset:image class="avatar-image" src="user/1.jpg" alt="" />
-                            </g:else>
-                        </sec:ifLoggedIn>
-                        <sec:ifNotLoggedIn>
-                            <asset:image class="avatar-image" src="user/1.jpg" alt="" />
-                        </sec:ifNotLoggedIn>
+
+                                <img class="avatar avatar-image" src="../assets/images/user/1.jpg" />
+
                         <div class="status red">&nbsp;</div>
-                        <sec:ifLoggedIn>
-                            <div class="avatar-username">${currentUser.username}</div>
-                        </sec:ifLoggedIn>
+
                     </div>
 
-                    <div class="icons">
-                        <img src="images/icon3.jpg" alt=""><img src="images/icon4.jpg" alt=""><img src="images/icon5.jpg" alt=""><img src="images/icon6.jpg" alt="">
-                    </div>
+
                 </div>
 
                 <div class="posttext pull-left">

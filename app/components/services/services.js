@@ -12,24 +12,6 @@ angular.module('myApp.services', [])
             if(!this.isAuthenticated) {
               $location.path('/login').search({redirect_url:redirectUrl}) ;
             }
-        },
-        getCurrentUser : function(redirectUrl){
-
-          if(!this.isAuthenticated){
-            this.authenticate(redirectUrl) ;
-            return null;
-          }
-            //From here, a user is authenticated (or token invalid)
-            $http({method: 'GET', url: apiUrl+'/user'}).then(function successCallback(response) {
-                return response.data ;
-            }, function errorCallback(response) {
-              console.log('Error GET /api/user') ;
-                if(response.status == 401){
-                  //token invalid
-                  this.authenticate(redirectUrl) ;
-                }
-            });
-
         }
     };
 })

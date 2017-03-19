@@ -26,7 +26,7 @@
                                 <div style="display: inline;">
                                     <a class="logo-text" href="/">ZZOverflow</a>
                                 </div> 
-                                <div class="dropdown" style="display: inline;">
+                                <!--div class="dropdown" style="display: inline;">
                                     <a data-toggle="dropdown" href="#" style="color: #f48024;" aria-expanded="false">
                                         
                                         .en
@@ -40,7 +40,7 @@
                                             <a role="menuitem" tabindex="-2" href="/?lang=fr">.fr</a>
                                         </li>
                                     </ul>
-                                </div>
+                                </div-->
                             </div>
                         </div>
                         <div class="col-lg-4 search hidden-xs hidden-sm col-md-3">
@@ -120,7 +120,7 @@
 
 
                                     <li ng-repeat="question in meta.importantQst">
-                                        <a  href="" >
+                                        <a  href="#!/question/{{question.id}}" >
                                             <div class="important-qst">
                                                 {{question.title}}
                                             </div>
