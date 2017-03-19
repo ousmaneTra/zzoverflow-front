@@ -17,7 +17,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-1 col-xs-3 col-sm-2 col-md-2 logo ">
-                            <a href="/#">
+                            <a href="#/">
                                 <img src="assets/images/common/logo.png" class="logo-size" alt="">
                             </a>
                         </div>
@@ -102,7 +102,7 @@
 
 
   <ul class="menu">
-    <li><a href="#!/">Questions</a></li>
+    <li><a href="#/">Questions</a></li>
     <li><a href="#!/profile">Profile</a></li>
     <li><a href="#!/login">Login</a></li>
   </ul>
@@ -110,11 +110,71 @@
   <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
+  <section class="content">
+    <div class="container" >
+            <div class="row post-content">
+                <div class="col-lg-8 col-md-8">
+                    <div ng-view>
+                    </div>
+                </div>
 
-  <div ng-view>
+                <div class="col-lg-4 col-md-4" ng-controller="sideBarController" >
+                    
+                    <div class="sidebarblock">
+                        <h3>Popular Questions</h3>
+                        <div class="divline"></div>
+                        <div class="blocktxt">
+                            <ul class="cats">
 
 
-  </div>
+                                    <li ng-repeat="question in meta.importantQst">
+                                        <a  href="" >
+                                            <div class="important-qst">
+                                                {{question.title}}
+                                            </div>
+                                            <div class="badge pull-right">
+                                                {{question.upvote}}
+                                            </div>
+                                            
+                                        </a>
+                                    </li>
+
+                            </ul>
+                        </div>
+                    </div>
+
+                        <!-- -->
+                    <div class="sidebarblock">
+                        <h3>Popular Tags</h3>
+                        <div class="divline"></div>
+                        <div class="blocktxt">
+                            <form action="#" method="post" class="form">
+                                <table class="poll">
+                                    <tbody>
+                                        <tr ng-repeat="tag in meta.listTag" >
+                                            <td>
+                                                <div class="progress">
+                                                    <div class="progress-bar color1" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ tag.questions.length * 100 / meta.totalTags | number : 0 }}%">
+                                                        {{tag.name}}
+                                                    </div>
+                                                    <div class="pourcent-tag" >
+                                                        {{ tag.questions.length * 100 / meta.totalTags | number : 0 }}%
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+
+                                </tbody></table>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+    </div>
+  </section>
+
+
 
   <div>Angular seed app: v<span app-version></span></div>
 

@@ -37,4 +37,14 @@ angular.module('myApp.services', [])
      return $http({method: 'GET', url: apiUrl+'/questions?max='+max}) ; 
    }
    return service ;
+})
+.factory('metaQuestionService', function(apiUrl,$http) {
+   var service = {} ;
+   service.getMeta = function(max){
+     if(max===undefined){
+        max = 100 ;
+     }
+     return $http({method: 'GET', url: apiUrl+'/metaQuestions?max='+max}) ; 
+   }
+   return service ;
 });

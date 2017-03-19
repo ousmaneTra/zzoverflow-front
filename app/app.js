@@ -1,7 +1,7 @@
 'use strict';
 
 // Declare app level module which depends on views, and components
-angular.module('myApp', [
+var myApp = angular.module('myApp', [
   'ngRoute',
   'ngCookies',
   'myApp.version',
@@ -25,8 +25,6 @@ config(['$locationProvider', '$routeProvider','$httpProvider', function($locatio
     controller: 'authenticationCtrl'
   });
 
-  
-
   $httpProvider.defaults.headers.common['Accept'] = 'application/json, text/javascript;charset=UTF-8';
 
 }])
@@ -42,3 +40,12 @@ config(['$locationProvider', '$routeProvider','$httpProvider', function($locatio
   }
 }) ;
 
+myApp.controller('sideBarController', ['$scope','metaQuestionService', function($scope, metaQuestionService) {
+
+    metaQuestionService.getMeta().then(function successCallback(response) {
+       $scope.meta = response.data ;
+        console.log($scope.meta.comments[1])
+    }, function errorCallback(response) {
+        handleStatusService.handle(response.status,'/') ;
+    }) ;
+}]);

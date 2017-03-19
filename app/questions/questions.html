@@ -1,4 +1,66 @@
-<p>Questions lists!!!</p>
+<!--p>Questions lists!!!</p>
 <p ng-repeat="question in questions">
     {{question.title}}
-</p>
+</p-->
+
+<!-- POST -->
+    <div class="post" ng-repeat="post in questions">                    
+        <div class="wrap-ut pull-left">
+            <div class="userinfo pull-left">
+                <div class="avatar">
+                    <g:if test="${post.user.avatar}">
+                        <img class="avatar avatar-image" src="assets/images/user/1.jpg" />
+                    </g:if>
+                    <g:else>
+                        <asset:image class="avatar-image" src="user/1.jpg" alt="" />
+                    </g:else>
+                    
+                    <div class="status green">&nbsp;</div>
+                    <div class="avatar-username">{{ post.user.username }}</div>
+                </div>
+
+                <div class="icons">
+                    <div class="up">
+                        <i class="fa fa-thumbs-o-up"></i>
+                        {{post.upvote}}
+                    </div>
+                    <div class="down">
+                        <i class="fa fa-thumbs-o-down"></i>
+                        {{post.downvote}}
+                    </div>
+                </div>
+            </div>
+            <div class="posttext pull-left">
+                <h2>
+                    <g:link action="show" id="${post.id}">
+                        {{post.title}}
+                    </g:link>
+                </h2>
+                <p class="post-body">
+                    {{post.body}}
+                </p>
+                <div class="tag-container">
+                    <span class="badge pull-left tag" ng-repeat="tag in post.tags">{{tag.name}}</span>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="postinfo pull-left">
+            <div class="comments">
+                    <div ng-class="post.correct == null ? 'commentbg' : 'commentbg-solved'" >
+                        {{meta.comments[post.id]}}
+                    <div class="mark"></div>
+                </div>
+
+            </div>
+            <div class="views"><i class="fa fa-eye"></i> {{post.nbView}} </div>
+            <div class="time">
+                <i class="fa fa-clock-o"></i>
+                    {{post.duration}}
+            </div>                                    
+        </div>
+        <div class="clearfix"></div>
+    </div>
+<!-- POST -->
+                
+        
