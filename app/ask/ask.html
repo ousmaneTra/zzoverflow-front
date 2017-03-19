@@ -1,0 +1,50 @@
+<script type="text/javascript" src="../assets/scripts/jquery-2.2.0.min.js"></script>
+<script type="text/javascript" src="../assets/scripts/jquery-ui.min.js"></script>
+<script type="text/javascript" src="../assets/scripts/tag-it.js"></script>
+<script>
+    $(function(){
+        $("#myTags").tagit({
+            placeholderText : "Tags",
+            availableTags: ["c++", "java", "php", "javascript", "ruby", "python", "c"]
+
+        });
+    });
+</script>
+<div class="container">
+    <div class="row">
+        <form  class="contact-form">
+                    <div class="row">
+                        <div class="">
+                            <div class="form-group">
+                                <input required="required" class="form-control" name="title" id="title" placeholder="Title : What's your programming question? Be specific." value="" type="text">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <input name="user.id" value="2" id="user.id" type="hidden">
+                    </div>
+                    <div class="row">
+                        <div class="">
+                            <div class="form-group">
+                                <textarea required="required" class="form-control textarea" rows="13" name="body" id="Message" placeholder="Question body"></textarea> 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="">
+                            <div class="form-group">
+                                <ul id="myTags" class="tagit ui-widget ui-widget-content ui-corner-all"><li class="tagit-new"><input class="ui-widget-content ui-autocomplete-input" placeholder="Tags" autocomplete="off" type="text"><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span></li></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="">
+                            <button type="submit" class="btn main-btn pull-right">Post Your Question</button>
+                        </div>
+                    </div>
+        </form>
+    </div>
+    <div class="row">
+        
+    </div>
+</div>

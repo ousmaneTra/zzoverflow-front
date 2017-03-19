@@ -1,5 +1,62 @@
-<p{{message}}></p>
+<!--p{{message}}></p>
 <p>Login.</p>
 <input ng-model="user.username" placeholder="Enter your username" class="form-control" type="text" name="username" id="username" />                                
 <input ng-model="user.password" placeholder="Enter your password" class="form-control" type="password" name="username" id="password" />
-<button ng-click="loginButtonClick()">Login</button>
+<button ng-click="loginButtonClick()">Login</button-->
+
+<div class="post">
+    <form id="loginForm" class="form newtopic" autocomplete="off">
+        <div class="postinfotop">
+
+            <div class="pull-center">
+                <label for="note"> Please Log In </label>
+            </div>
+
+            <div class="clearfix"></div>
+        </div>
+        <div class="topwrap">
+            <div class="userinfo pull-left">
+                <div class="avatar">
+                    <a href="/">
+                        <img src="../assets/images/common/logo.png" class="logo-size" alt="">
+                    </a>
+                </div>
+            </div>
+            <div class="posttext pull-left">
+
+                
+
+                <div>
+                    <input ng-model="user.username" placeholder="Enter your username" class="form-control" name="username" id="username" type="text">                                
+                </div>
+
+                <div>
+                    <input ng-model="user.password" placeholder="Enter your password" class="form-control" name="password" id="password" type="password">
+                </div>
+
+
+            </div>
+            <div class="clearfix"></div>
+        </div>                              
+        <div class="postinfobot">
+
+            <div class="notechbox pull-left">
+                <input name="note" id="note" class="form-control" type="checkbox">
+            </div>
+
+            <div class="pull-left">
+                <label for="note"> Remember Me</label>
+            </div>
+
+            <div class="pull-right postreply">
+                <div class="pull-left">
+                    <button class="btn btn-primary" ng-click="loginButtonClick()">Login</button>
+                </div>                                
+                <div class="clearfix"></div>
+            </div>
+
+
+            <div class="clearfix"></div>
+        </div>
+    </form>
+</div>

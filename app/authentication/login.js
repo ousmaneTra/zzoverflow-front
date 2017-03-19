@@ -17,6 +17,8 @@ angular.module('myApp.authentication', ['ngRoute','ngCookies','myApp.services'])
   $scope.message = '' ;
   console.log('authenticationCtrl');
   $scope.loginButtonClick = function(){
+    console.log(apiUrl+'/api/login')
+
     $http({method: 'POST', url: apiUrl+'/api/login',data: $scope.user})
     .then(function successCallback(response) {
       var data = response.data ;

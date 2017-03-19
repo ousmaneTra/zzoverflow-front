@@ -7,12 +7,13 @@ var myApp = angular.module('myApp', [
   'myApp.version',
   'myApp.services',
   'myApp.profile',
+  'myApp.ask',
   'myApp.authentication',
   'myApp.questions'
 ]).
 config(['$locationProvider', '$routeProvider','$httpProvider', function($locationProvider, $routeProvider,$httpProvider) {
   
-  //$locationProvider.hashPrefix('!');
+  $locationProvider.hashPrefix('!');
 
   // Routing 
   $routeProvider.when('/', {
@@ -23,6 +24,11 @@ config(['$locationProvider', '$routeProvider','$httpProvider', function($locatio
   $routeProvider.when('/login', {
     templateUrl: 'authentication/login.html',
     controller: 'authenticationCtrl'
+  });
+
+  $routeProvider.when('/ask', {
+    templateUrl: 'ask/ask.html',
+    controller: 'askCtrl'
   });
 
   $httpProvider.defaults.headers.common['Accept'] = 'application/json, text/javascript;charset=UTF-8';
