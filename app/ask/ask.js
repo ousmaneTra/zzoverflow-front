@@ -36,7 +36,7 @@ angular.module('myApp.ask', ['ngRoute','myApp.services']).directive('importscrip
             console.log(data)
             if(data != null ){
                 console.log("/question/"+data.id);
-                $location.path('/question').search({id:data.id}) ;
+                $location.path('/question/'+data.id) ;
             }
         }, function errorCallback(response) {
             console.log('Error') ;

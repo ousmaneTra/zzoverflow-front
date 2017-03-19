@@ -32,7 +32,7 @@ config(['$locationProvider', '$routeProvider','$httpProvider', function($locatio
     controller: 'askCtrl'
   });
 
-  $routeProvider.when('/question', {
+  $routeProvider.when('/question/:questionId', {
     templateUrl: 'show/show.html',
     controller: 'showCtrl'
   });
@@ -51,6 +51,8 @@ config(['$locationProvider', '$routeProvider','$httpProvider', function($locatio
     //Do nothing !!!
   }
 }) ;
+
+myApp.value('currentUser', {});
 
 myApp.controller('sideBarController', ['$scope','metaQuestionService', function($scope, metaQuestionService) {
 
