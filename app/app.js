@@ -8,6 +8,7 @@ var myApp = angular.module('myApp', [
   'myApp.services',
   'myApp.profile',
   'myApp.ask',
+  'myApp.show',
   'myApp.authentication',
   'myApp.questions'
 ]).
@@ -31,6 +32,11 @@ config(['$locationProvider', '$routeProvider','$httpProvider', function($locatio
     controller: 'askCtrl'
   });
 
+  $routeProvider.when('/question', {
+    templateUrl: 'show/show.html',
+    controller: 'showCtrl'
+  });
+
   $httpProvider.defaults.headers.common['Accept'] = 'application/json, text/javascript;charset=UTF-8';
 
 }])
@@ -52,6 +58,6 @@ myApp.controller('sideBarController', ['$scope','metaQuestionService', function(
        $scope.meta = response.data ;
         console.log($scope.meta.comments[1])
     }, function errorCallback(response) {
-        handleStatusService.handle(response.status,'/') ;
+        //handleStatusService.handle(response.status,'/') ;
     }) ;
 }]);

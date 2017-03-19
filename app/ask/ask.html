@@ -1,6 +1,9 @@
-<script type="text/javascript" src="../assets/scripts/jquery-2.2.0.min.js"></script>
+<!--script type="text/javascript" src="../assets/scripts/jquery-2.2.0.min.js"></script>
 <script type="text/javascript" src="../assets/scripts/jquery-ui.min.js"></script>
-<script type="text/javascript" src="../assets/scripts/tag-it.js"></script>
+<script type="text/javascript" src="../assets/scripts/tag-it.js"></script-->
+
+
+<div importscripts></div>
 <script>
     $(function(){
         $("#myTags").tagit({
@@ -16,30 +19,35 @@
                     <div class="row">
                         <div class="">
                             <div class="form-group">
-                                <input required="required" class="form-control" name="title" id="title" placeholder="Title : What's your programming question? Be specific." value="" type="text">
+                                <input required="required" class="form-control"  ng-model="post.title" id="title" placeholder="Title : What's your programming question? Be specific." value="" type="text">
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <input name="user.id" value="2" id="user.id" type="hidden">
+                        <input ng-model="post.user" value="{{user.id}}" id="user.id" type="hidden">
                     </div>
                     <div class="row">
                         <div class="">
                             <div class="form-group">
-                                <textarea required="required" class="form-control textarea" rows="13" name="body" id="Message" placeholder="Question body"></textarea> 
+                                <textarea required="required" class="form-control textarea" rows="13"  ng-model="post.body" id="Message" placeholder="Question body"></textarea> 
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="">
                             <div class="form-group">
-                                <ul id="myTags" class="tagit ui-widget ui-widget-content ui-corner-all"><li class="tagit-new"><input class="ui-widget-content ui-autocomplete-input" placeholder="Tags" autocomplete="off" type="text"><span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span></li></ul>
+                                <ul id="myTags" class="tagit ui-widget ui-widget-content ui-corner-all">
+                                    <li class="tagit-new">
+                                        <input class="ui-widget-content ui-autocomplete-input" ng-model="post.tags" placeholder="Tags" autocomplete="off" type="text">
+                                        <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="">
-                            <button type="submit" class="btn main-btn pull-right">Post Your Question</button>
+                            <button ng-click="submitClick()" class="btn main-btn pull-right">Post Your Question</button>
                         </div>
                     </div>
         </form>

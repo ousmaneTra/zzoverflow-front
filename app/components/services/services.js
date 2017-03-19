@@ -29,15 +29,20 @@ angular.module('myApp.services', [])
    return service ;
 })
 .factory('questionService', function(apiUrl,$http) {
-   var service = {} ;
-   service.getAll = function(max){
-     if(max===undefined){
-        max = 100 ;
-     }
-     return $http({method: 'GET', url: apiUrl+'/questions?max='+max}) ; 
-   }
-   return service ;
+   return { 
+      getAll : function(max){
+        if(max===undefined){
+            max = 100 ;
+        }
+        return $http({method: 'GET', url: apiUrl+'/questions?max='+max}) ; 
+      },
+      getQuestion  : function(index){
+
+        return $http({method: 'GET', url: apiUrl+'/question/get?id='+index});
+      }
+   };
 })
+
 .factory('metaQuestionService', function(apiUrl,$http) {
    var service = {} ;
    service.getMeta = function(max){
