@@ -54,11 +54,11 @@ angular.module('myApp.show', ['ngRoute','myApp.services'])
                         $scope.question.upvote = response.data
                     else
                         $scope.question.downvote = response.data
-                else if(type == 'ans')
+                /*else if(type == 'ans')
                     if(state == 'up')
                         $scope.question.answers[id]
                     else
-                        $scope.question.downvote = response.data
+                        $scope.question.downvote = response.data*/
             }, function errorCallback(response) {
                 console.log('Error') ;
         })};
